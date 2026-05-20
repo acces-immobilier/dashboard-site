@@ -421,7 +421,7 @@ const DashboardView = ({ setActiveTab }) => {
   const maxViews = Math.max(...topAnnonces.map(l => l.views), 1);
 
   const chargerTout = () => {
-    fetch('http://localhost/remax/api_relais.php')
+    fetch('https://acces-immobilier.com/remax/api_relais.php')
       .then(r => r.json())
       .then(data => {
   const listings = data.data || data;
@@ -1126,7 +1126,7 @@ const SettingsView = () => {
     <p className="text-sm text-gray-500 mt-1">Remplace la photo principale de la page Agence.</p>
   </div>
   <div className="p-5">
-    <img src={`http://localhost/remax/assets/images/equipe54b0.jpg?${Date.now()}`} 
+    <img src={`https://acces-immobilier.com/remax/assets/images/equipe54b0.jpg?${Date.now()}`} 
       alt="Équipe" className="w-full h-48 object-cover rounded-xl mb-4"/>
     <label className="border-2 border-dashed rounded-xl p-6 text-center block cursor-pointer transition-colors border-indigo-200 bg-indigo-50/30 hover:bg-indigo-50">
       <input type="file" accept=".jpg,.jpeg,.png,.webp" className="hidden" onChange={async (e) => {
@@ -1525,7 +1525,7 @@ const voirStats = (article) => {
         <div className="flex gap-2">
           <button onClick={async () => {
   await sauvegarder(articleEnCours.statut || 'brouillon');
-  window.open(`http://localhost/remax/fr/blog-article.html?slug=${articleEnCours.slug || slugify(articleEnCours.titre_fr)}&preview=1`, '_blank');
+  window.open(`https://acces-immobilier.com/remax/fr/blog-article.html?slug=${articleEnCours.slug || slugify(articleEnCours.titre_fr)}&preview=1`, '_blank');
 }}
 className="flex items-center gap-2 px-3 py-2 border border-gray-200 bg-white text-gray-700 rounded-lg hover:bg-gray-50 text-sm font-medium">
   <Eye size={15}/> Prévisualiser
