@@ -798,10 +798,10 @@ const FormsView = () => {
   };
 
   const charger = () => {
-    fetch(`${API}?action=contacts`).then(r => r.json()).then(setContacts);
-    fetch(`${API}?action=rappels`).then(r => r.json()).then(setRappels);
-    fetch(`${API}?action=estimations`).then(r => r.json()).then(setEstimations);
-    fetch(`${API}?action=alertes`).then(r => r.json()).then(setAlertes);
+    fetch(`${API}?action=contacts`).then(r => r.json()).then(d => setContacts(Array.isArray(d) ? d : []));
+    fetch(`${API}?action=rappels`).then(r => r.json()).then(d => setRappels(Array.isArray(d) ? d : []));
+    fetch(`${API}?action=estimations`).then(r => r.json()).then(d => setEstimations(Array.isArray(d) ? d : []));
+    fetch(`${API}?action=alertes`).then(r => r.json()).then(d => setAlertes(Array.isArray(d) ? d : []));
   };
 
   useEffect(() => { charger(); }, []);
