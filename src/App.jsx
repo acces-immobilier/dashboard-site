@@ -12,7 +12,7 @@ leafletStyle.textContent = `.leaflet-pane, .leaflet-top, .leaflet-bottom, .leafl
 document.head.appendChild(leafletStyle);
 
 // ── Utilitaires ──────────────────────────────────────────────
-const API = 'https://acces-immobilier.com/remax/api_dashboard.php';
+const API = 'https://acces-immobilier.com/api_dashboard.php';
 
 const formatDateTime = (dateString) => {
   if (!dateString) return '—';
