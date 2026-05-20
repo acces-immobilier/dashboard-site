@@ -421,7 +421,7 @@ const DashboardView = ({ setActiveTab }) => {
   const maxViews = Math.max(...topAnnonces.map(l => l.views), 1);
 
   const chargerTout = () => {
-    fetch('https://acces-immobilier.com/remax/api_relais.php')
+    fetch('https://acces-immobilier.com/api_relais.php')
       .then(r => r.json())
       .then(data => {
   const listings = data.data || data;
