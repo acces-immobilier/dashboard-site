@@ -1162,7 +1162,7 @@ const SettingsView = () => {
     {p.actif == 1 && <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold border border-green-200">En ligne</span>}
 </td>
 <td className="p-4 text-center">
-    <a href={`https://acces-immobilier.com/assets/images/equipe54b0.jpg`} download target="_blank"
+    <a href={`https://acces-immobilier.com/assets/images/${p.nom_fichier}`} download target="_blank"
         className="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg inline-flex">
         <DownloadCloud size={16}/>
     </a>
