@@ -1151,7 +1151,7 @@ const SettingsView = () => {
         <div className="border border-gray-200 rounded-xl overflow-hidden">
           <table className="w-full text-sm">
             <thead className="bg-gray-50 border-b border-gray-200 text-gray-500 text-xs uppercase">
-              <tr><th className="p-4">Fichier</th><th className="p-4">Date d'upload</th><th className="p-4 text-center">Statut</th></tr>
+              <tr><th className="p-4">Fichier</th><th className="p-4">Date d'upload</th><th className="p-4 text-center">Statut</th><th className="p-4 text-center">Télécharger</th></tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {photosEquipe.map(p => (
@@ -1159,8 +1159,14 @@ const SettingsView = () => {
                   <td className="p-4 font-medium text-gray-600">{p.nom_fichier}</td>
                   <td className="p-4 font-mono text-xs text-gray-500">{formatDateTime(p.uploaded_at)}</td>
                   <td className="p-4 text-center">
-                    {p.actif == 1 && <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold border border-green-200">En ligne</span>}
-                  </td>
+    {p.actif == 1 && <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold border border-green-200">En ligne</span>}
+</td>
+<td className="p-4 text-center">
+    <a href={`https://acces-immobilier.com/assets/images/equipe54b0.jpg`} download target="_blank"
+        className="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg inline-flex">
+        <DownloadCloud size={16}/>
+    </a>
+</td>
                 </tr>
               ))}
             </tbody>
