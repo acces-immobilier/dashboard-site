@@ -460,7 +460,9 @@ fetch(`${API}?action=trafic&periode=${traficPeriode}`).then(r => r.json()).then(
 fetch(`${API}?action=activites`).then(r => r.json()).then(d => setActivites(Array.isArray(d) ? d : []));
 };
 useEffect(() => {
-  fetch(`${API}?action=trafic&periode=${traficPeriode}`).then(r => r.json()).then(setTrafic);
+  fetch(`${API}?action=trafic&periode=${traficPeriode}`)
+    .then(r => r.json())
+    .then(d => setTrafic(d && d.visiteurs !== undefined ? d : { visiteurs: 0, pages_vues: 0, graphique: [] }));
 }, [traficPeriode]);
 useEffect(() => { 
   chargerTout();
