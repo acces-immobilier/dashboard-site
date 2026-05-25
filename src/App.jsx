@@ -414,6 +414,8 @@ const DashboardView = ({ setActiveTab }) => {
   const [activites, setActivites] = useState([]);
   const [trafic, setTrafic] = useState({ visiteurs: 0, pages_vues: 0, graphique: [] });
   const [traficPeriode, setTraficPeriode] = useState('7j');
+  const [traficDebut, setTraficDebut] = useState(() => new Date(Date.now() - 7*864e5).toISOString().split('T')[0]);
+  const [traficFin, setTraficFin] = useState(() => new Date().toISOString().split('T')[0]);
   const [topPeriode, setTopPeriode] = useState('7j');
   const [modalClassement, setModalClassement] = useState(false);
   const [geoVisiteurs, setGeoVisiteurs] = useState([]);
