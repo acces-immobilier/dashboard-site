@@ -456,7 +456,6 @@ fetch(`${API}?action=geo_visiteurs&periode=${topPeriode}`)
   })
   .catch(() => setApiStatus('error'));
 
-fetch(`${API}?action=trafic&periode=${traficPeriode}`).then(r => r.json()).then(d => setTrafic(d && d.visiteurs !== undefined ? d : { visiteurs: 0, pages_vues: 0, graphique: [] }));
 fetch(`${API}?action=activites`).then(r => r.json()).then(d => setActivites(Array.isArray(d) ? d : []));
 };
 useEffect(() => {
