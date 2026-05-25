@@ -512,10 +512,8 @@ useEffect(() => {
           <div className="h-40 w-full flex items-end gap-2 border-b border-gray-100 pb-2">
             {trafic.graphique && trafic.graphique.length > 0 ? (() => {
              const max = Math.max(...trafic.graphique.map(g => g.visiteurs), 1);
-const min = Math.min(...trafic.graphique.map(g => g.visiteurs));
-const range = max - min || 1;
 return trafic.graphique.map((g, i) => {
-  const h = Math.max(8, Math.round((((g.visiteurs || 0) - min) / range) * 120) + 20);
+  const h = Math.max(8, Math.round(((g.visiteurs || 0) / max) * 140));
                 return (
                   <div key={i} className="flex-1 flex flex-col items-center gap-1 group relative">
                     <div className="w-full bg-gradient-to-t from-indigo-500 to-blue-400 rounded-t-sm" style={{ height: `${h}px`, minHeight: '8px' }}>
