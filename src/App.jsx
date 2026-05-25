@@ -459,10 +459,12 @@ fetch(`${API}?action=geo_visiteurs&periode=${topPeriode}`)
 fetch(`${API}?action=activites`).then(r => r.json()).then(d => setActivites(Array.isArray(d) ? d : []));
 };
 useEffect(() => {
-  fetch(`${API}?action=trafic&periode=${traficPeriode}`)
+  let url = `${API}?action=trafic&periode=${traficPeriode}`;
+  if (traficPeriode === 'custom') url += `&debut=${traficDebut}&fin=${traficFin}`;
+  fetch(url)
     .then(r => r.json())
     .then(d => setTrafic(d && d.visiteurs !== undefined ? d : { visiteurs: 0, pages_vues: 0, graphique: [] }));
-}, [traficPeriode]);
+}, [traficPeriode, traficDebut, traficFin]);
 useEffect(() => { 
   chargerTout();
   const interval = setInterval(() => {
@@ -501,7 +503,10 @@ useEffect(() => {
       <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="p-5 border-b border-gray-100 flex justify-between items-center bg-gradient-to-r from-indigo-50/50 to-transparent">
           <h3 className="text-base font-bold text-gray-800 flex items-center gap-2"><BarChart3 size={18} className="text-indigo-600"/> Trafic du site</h3>
-          <DateRangeSelector value={traficPeriode} onChange={setTraficPeriode}/>
+          <PeriodeSelector value={traficPeriode} onChange={setTraficPeriode}
+  dateDebut={traficDebut} dateFin={traficFin}
+  onDateChange={(type, val) => { if(type==='debut') setTraficDebut(val); else setTraficFin(val); }}
+/>
         </div>
         <div className="p-5">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-6">
