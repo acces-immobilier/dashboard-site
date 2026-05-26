@@ -405,6 +405,52 @@ const GeoSection = ({ API }) => {
   );
 };
 
+const DateRangeSelectorPlus = ({ value, onChange, dateDebut, dateFin, onDateChange }) => {
+  const [open, setOpen] = useState(false);
+  const [showCustom, setShowCustom] = useState(false);
+  const options = [
+    { label: "Aujourd'hui", val: '1j' },
+    { label: '7 derniers jours', val: '7j' },
+    { label: 'Ce mois', val: '1m' },
+    { label: 'Cette année', val: '1an' },
+    { label: 'Plage personnalisée', val: 'custom' },
+  ];
+  const currentLabel = value === 'custom' ? `${dateDebut} → ${dateFin}` : options.find(o => o.val === value)?.label || '7 derniers jours';
+  return (
+    <div className="relative">
+      <button onClick={() => setOpen(!open)} className="flex items-center gap-2 bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-sm text-gray-700 hover:bg-gray-50 shadow-sm">
+        <Calendar size={13}/>{currentLabel}<ChevronDown size={13}/>
+      </button>
+      {open && (
+        <div className="absolute right-0 mt-1 w-52 bg-white border border-gray-100 shadow-xl rounded-xl overflow-hidden z-30">
+          {options.map(o => (
+            <button key={o.val} onClick={() => {
+              if (o.val === 'custom') { setShowCustom(true); setOpen(false); }
+              else { onChange(o.val); setShowCustom(false); setOpen(false); }
+            }} className={`w-full text-left px-4 py-2.5 text-sm hover:bg-indigo-50 ${value === o.val ? 'bg-indigo-50 text-indigo-700 font-semibold' : 'text-gray-700'}`}>
+              {o.label}
+            </button>
+          ))}
+        </div>
+      )}
+      {showCustom && (
+        <div className="absolute right-0 mt-1 w-72 bg-white border border-gray-200 shadow-xl rounded-xl p-4 z-30">
+          <div className="space-y-3">
+            <div><label className="text-xs text-gray-500 mb-1 block">Date de début</label>
+              <input type="date" value={dateDebut} onChange={e => onDateChange('debut', e.target.value)} className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-indigo-500"/></div>
+            <div><label className="text-xs text-gray-500 mb-1 block">Date de fin</label>
+              <input type="date" value={dateFin} onChange={e => onDateChange('fin', e.target.value)} className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-indigo-500"/></div>
+            <div className="flex gap-2 pt-1">
+              <button onClick={() => setShowCustom(false)} className="flex-1 px-3 py-2 text-gray-600 border border-gray-200 rounded-lg text-sm hover:bg-gray-50">Annuler</button>
+              <button onClick={() => { onChange('custom'); setShowCustom(false); }} className="flex-1 px-3 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-700 font-medium">Appliquer</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const DashboardView = ({ setActiveTab }) => {
   const [apiStatus, setApiStatus] = useState('ok');
   const [annonces, setAnnonces] = useState([]);
@@ -505,7 +551,7 @@ useEffect(() => {
       <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="p-5 border-b border-gray-100 flex justify-between items-center bg-gradient-to-r from-indigo-50/50 to-transparent">
           <h3 className="text-base font-bold text-gray-800 flex items-center gap-2"><BarChart3 size={18} className="text-indigo-600"/> Trafic du site</h3>
-          <PeriodeSelector value={traficPeriode} onChange={setTraficPeriode}
+<DateRangeSelectorPlus value={traficPeriode} onChange={setTraficPeriode}
   dateDebut={traficDebut} dateFin={traficFin}
   onDateChange={(type, val) => { if(type==='debut') setTraficDebut(val); else setTraficFin(val); }}
 />
