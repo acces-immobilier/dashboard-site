@@ -928,9 +928,7 @@ const FormsView = () => {
       </div>
     </div>
   )}
-</Modal>
-
-  return (
+return (
     <div className="space-y-5">
       {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
       <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2"><Inbox size={22} className="text-indigo-600"/> Gestion des Formulaires</h2>
@@ -942,7 +940,10 @@ const FormsView = () => {
             {t.label} <span className={`text-xs px-2 py-0.5 rounded-full ${activeTab === t.id ? 'bg-indigo-100 text-indigo-700' : 'bg-gray-200 text-gray-600'}`}>{t.count}</span>
           </button>
         ))}
-      </div>
+      </div>    
+</Modal>
+
+  
 
       {/* CONTACTS */}
       {activeTab === 'contacts' && (
