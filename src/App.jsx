@@ -1922,15 +1922,14 @@ const renderContent = () => {
 
       {/* Mobile header */}
       <div className="md:hidden bg-white/90 backdrop-blur-xl border-b border-gray-200 p-4 flex justify-between items-center sticky top-0 z-30 shadow-sm">
-        <h1 className="text-lg font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">ImmoAdmin.</h1>
+        <img src="/assets/image/logo/logo4561.jpg" alt="RE/MAX Acces Immobilier" className="h-8 object-contain"/>
         <button onClick={() => setMobileOpen(!mobileOpen)} className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg"><Menu size={22}/></button>
       </div>
 
       {/* Sidebar */}
       <div className={`fixed inset-y-0 left-0 z-40 w-60 bg-white/95 backdrop-blur-2xl border-r border-gray-200 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 flex flex-col shadow-2xl md:shadow-none ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="p-5 hidden md:block border-b border-gray-100">
-          <h1 className="text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">ImmoAdmin.</h1>
-          <p className="text-xs text-gray-400 mt-0.5">RE/MAX Acces Immobilier</p>
+          <img src="/assets/image/logo/logo4561.jpg" alt="RE/MAX Acces Immobilier" className="h-10 object-contain"/>
         </div>
         <nav className="flex-1 px-3 py-5 space-y-1">
           {menu.map(item => {
