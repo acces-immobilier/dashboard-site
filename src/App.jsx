@@ -885,42 +885,7 @@ const FormsView = () => {
     { id: 'alertes', label: 'Alertes Emails', count: alertes.length },
   ];
 
-  <Modal isOpen={!!modalDetail} onClose={() => setModalDetail(null)} title="Détail du message" large>
-  {modalDetail && (
-    <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-3">
-        <div className="bg-gray-50 rounded-xl p-3">
-          <p className="text-xs text-gray-500 uppercase font-semibold mb-1">Nom</p>
-          <p className="font-bold text-gray-800">{modalDetail.prenom} {modalDetail.nom}</p>
-        </div>
-        <div className="bg-gray-50 rounded-xl p-3">
-          <p className="text-xs text-gray-500 uppercase font-semibold mb-1">Email</p>
-          <a href={`mailto:${modalDetail.email}`} className="font-bold text-indigo-600 hover:underline">{modalDetail.email}</a>
-        </div>
-        <div className="bg-gray-50 rounded-xl p-3">
-          <p className="text-xs text-gray-500 uppercase font-semibold mb-1">Téléphone</p>
-          <a href={`tel:${modalDetail.telephone}`} className="font-bold text-gray-800">{modalDetail.telephone || '—'}</a>
-        </div>
-        <div className="bg-gray-50 rounded-xl p-3">
-          <p className="text-xs text-gray-500 uppercase font-semibold mb-1">Date</p>
-          <p className="font-bold text-gray-800">{formatDateTime(modalDetail.created_at)}</p>
-        </div>
-        {modalDetail.ref_bien && (
-          <div className="bg-indigo-50 rounded-xl p-3 col-span-2">
-            <p className="text-xs text-indigo-500 uppercase font-semibold mb-1">Référence bien</p>
-            <p className="font-bold text-indigo-800">{modalDetail.ref_bien}</p>
-          </div>
-        )}
-      </div>
-      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
-        <p className="text-xs text-yellow-600 uppercase font-semibold mb-2">Message complet</p>
-        <p className="text-sm text-gray-800 whitespace-pre-wrap">{modalDetail.message || '—'}</p>
-      </div>
-      <div className="flex gap-3 pt-2">
-        <a href={`mailto:${modalDetail.email}?subject=Suite à votre demande`} className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700">
-          <Mail size={15}/> Répondre par email
-        </a>
-        return (
+  return (
     <div className="space-y-5">
       {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
 
@@ -1008,7 +973,8 @@ const FormsView = () => {
                       <p className="text-xs text-gray-500">{c.email}</p>
                       {c.telephone && <p className="text-xs text-gray-500">{c.telephone}</p>}
                     </td>
-                    <td className="p-4 max-w-xs"><p className="text-sm text-gray-700 truncate">{c.message}</p></td>
+                    <td className="p-4 max-w-xs">
+  <p className="text-sm text-gray-700 truncate">{c.message}</p>
   <button onClick={() => setModalDetail(c)} className="text-xs text-indigo-600 hover:underline mt-1">Voir tout →</button>
 </td>
                     <td className="p-4 text-xs text-gray-500 font-mono">{formatDateTime(c.created_at)}</td>
