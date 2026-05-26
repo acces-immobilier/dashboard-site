@@ -705,6 +705,7 @@ const ClientsView = () => {
   const [modalAdd, setModalAdd] = useState(false);
   const [formAdd, setFormAdd] = useState({ nom: '', email: '', telephone: '' });
   const [toast, setToast] = useState(null);
+  const [modalDetail, setModalDetail] = useState(null);
 
   const showToast = (message, type = 'success') => {
     setToast({ message, type });
@@ -970,8 +971,7 @@ const FormsView = () => {
                       <p className="text-xs text-gray-500">{c.email}</p>
                       {c.telephone && <p className="text-xs text-gray-500">{c.telephone}</p>}
                     </td>
-                    <td className="p-4 max-w-xs">
-  <p className="text-sm text-gray-700 truncate">{c.message}</p>
+                    <td className="p-4 max-w-xs"><p className="text-sm text-gray-700 truncate">{c.message}</p></td>
   <button onClick={() => setModalDetail(c)} className="text-xs text-indigo-600 hover:underline mt-1">Voir tout →</button>
 </td>
                     <td className="p-4 text-xs text-gray-500 font-mono">{formatDateTime(c.created_at)}</td>
