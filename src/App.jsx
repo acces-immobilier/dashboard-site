@@ -920,19 +920,56 @@ const FormsView = () => {
         <a href={`mailto:${modalDetail.email}?subject=Suite à votre demande`} className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700">
           <Mail size={15}/> Répondre par email
         </a>
-        {modalDetail.telephone && (
-          <a href={`tel:${modalDetail.telephone}`} className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700">
-            <Phone size={15}/> Appeler
-          </a>
-        )}
-      </div>
-    </div>
-  )}
-return (
+        return (
     <div className="space-y-5">
       {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
-      <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2"><Inbox size={22} className="text-indigo-600"/> Gestion des Formulaires</h2>
 
+      <Modal isOpen={!!modalDetail} onClose={() => setModalDetail(null)} title="Détail du message" large>
+        {modalDetail && (
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-gray-50 rounded-xl p-3">
+                <p className="text-xs text-gray-500 uppercase font-semibold mb-1">Nom</p>
+                <p className="font-bold text-gray-800">{modalDetail.prenom} {modalDetail.nom}</p>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-3">
+                <p className="text-xs text-gray-500 uppercase font-semibold mb-1">Email</p>
+                <a href={`mailto:${modalDetail.email}`} className="font-bold text-indigo-600 hover:underline">{modalDetail.email}</a>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-3">
+                <p className="text-xs text-gray-500 uppercase font-semibold mb-1">Téléphone</p>
+                <a href={`tel:${modalDetail.telephone}`} className="font-bold text-gray-800">{modalDetail.telephone || '—'}</a>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-3">
+                <p className="text-xs text-gray-500 uppercase font-semibold mb-1">Date</p>
+                <p className="font-bold text-gray-800">{formatDateTime(modalDetail.created_at)}</p>
+              </div>
+              {modalDetail.ref_bien && (
+                <div className="bg-indigo-50 rounded-xl p-3 col-span-2">
+                  <p className="text-xs text-indigo-500 uppercase font-semibold mb-1">Référence bien</p>
+                  <p className="font-bold text-indigo-800">{modalDetail.ref_bien}</p>
+                </div>
+              )}
+            </div>
+            <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+              <p className="text-xs text-yellow-600 uppercase font-semibold mb-2">Message complet</p>
+              <p className="text-sm text-gray-800 whitespace-pre-wrap">{modalDetail.message || '—'}</p>
+            </div>
+            <div className="flex gap-3 pt-2">
+              <a href={`mailto:${modalDetail.email}?subject=Suite à votre demande`} className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700">
+                <Mail size={15}/> Répondre par email
+              </a>
+              {modalDetail.telephone && (
+                <a href={`tel:${modalDetail.telephone}`} className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700">
+                  <Phone size={15}/> Appeler
+                </a>
+              )}
+            </div>
+          </div>
+        )}
+      </Modal>
+
+      <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2"><Inbox size={22} className="text-indigo-600"/> Gestion des Formulaires</h2>
       <div className="flex gap-1 border-b border-gray-200">
         {tabs.map(t => (
           <button key={t.id} onClick={() => setActiveTab(t.id)}
@@ -940,8 +977,7 @@ return (
             {t.label} <span className={`text-xs px-2 py-0.5 rounded-full ${activeTab === t.id ? 'bg-indigo-100 text-indigo-700' : 'bg-gray-200 text-gray-600'}`}>{t.count}</span>
           </button>
         ))}
-      </div>    
-</Modal>
+      </div>
 
   
 
