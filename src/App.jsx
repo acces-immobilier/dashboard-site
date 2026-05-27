@@ -689,17 +689,35 @@ return trafic.graphique.map((g, i) => {
         <div className="mb-3"><DateRangeSelector value={topPeriode} onChange={setTopPeriode}/></div>
         <table className="w-full text-left border-collapse text-sm">
           <thead><tr className="bg-gray-50 text-gray-500 text-xs uppercase">
-            <th className="p-3">#</th><th className="p-3">Référence</th><th className="p-3">Bien</th><th className="p-3 text-right">Vues</th>
-          </tr></thead>
+  <th className="p-3">#</th>
+  <th className="p-3">Photo</th>
+  <th className="p-3">Bien</th>
+  <th className="p-3 text-right">Vues</th>
+</tr></thead>
           <tbody className="divide-y divide-gray-100">
             {topAnnonces.map((list, i) => (
-              <tr key={list.id} className="hover:bg-gray-50">
-                <td className="p-3 font-bold text-gray-400">{i+1}</td>
-                <td className="p-3 font-mono text-xs text-gray-500">{list.id}</td>
-                <td className="p-3"><p className="font-semibold text-gray-800">{list.title}</p><p className="text-xs text-gray-400">{list.city} — {list.price}</p></td>
-                <td className="p-3 text-right font-bold text-indigo-600">{list.views}</td>
-              </tr>
-            ))}
+  <tr key={list.id} className="hover:bg-gray-50">
+    <td className="p-3 font-bold text-gray-400">{i+1}</td>
+    <td className="p-3">
+      {list.image ? (
+        <img src={list.image} alt="" className="w-12 h-12 object-cover rounded-lg border border-gray-100"/>
+      ) : (
+        <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+          <Home size={16} className="text-gray-300"/>
+        </div>
+      )}
+    </td>
+    <td className="p-3">
+      <a href={`https://acces-immobilier.com/fr/detail-bien.html?ref=${list.id}`} target="_blank" rel="noreferrer"
+        className="font-semibold text-gray-800 hover:text-indigo-600 hover:underline">
+        {list.title}
+      </a>
+      <p className="text-xs text-gray-400">{list.city} — {list.price}</p>
+      <p className="text-xs text-gray-400 font-mono">{list.id}</p>
+    </td>
+    <td className="p-3 text-right font-bold text-indigo-600">{list.views}</td>
+  </tr>
+))}
           </tbody>
         </table>
       </Modal>
