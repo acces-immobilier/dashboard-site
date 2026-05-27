@@ -491,6 +491,7 @@ fetch(`${API}?action=top_annonces&periode=${topPeriode}`)
         title: get('title') || 'Bien immobilier',
         city: get('city') || '',
         price: new Intl.NumberFormat('fr-FR').format(get('price')) + ' €',
+        image: get('picture') || get('photo') || get('image') || '',
         views: vueBDD ? parseInt(vueBDD.vues) : 0
       };
     }).sort((a, b) => b.views - a.views);
@@ -598,16 +599,28 @@ return trafic.graphique.map((g, i) => {
           </div>
           <div className="p-5 flex-1 space-y-4">
             {topAnnonces.slice(0, 10).map((list, idx) => (
-              <div key={list.id}>
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="font-semibold text-gray-800 truncate pr-4">{idx+1}. {list.title} <span className="text-gray-400 font-normal text-xs">({list.id})</span></span>
-                  <span className="font-bold text-indigo-600 flex items-center gap-1 flex-shrink-0"><Eye size={13}/> {list.views}</span>
-                </div>
-                <div className="w-full bg-gray-100 rounded-full h-1.5">
-                  <div className="bg-gradient-to-r from-blue-500 to-indigo-500 h-1.5 rounded-full" style={{ width: `${(list.views / maxViews) * 100}%` }}></div>
-                </div>
-              </div>
-            ))}
+  <div key={list.id} className="flex gap-3 items-center">
+    {list.image ? (
+      <img src={list.image} alt={list.title} className="w-14 h-14 object-cover rounded-lg flex-shrink-0 border border-gray-100"/>
+    ) : (
+      <div className="w-14 h-14 bg-gray-100 rounded-lg flex-shrink-0 flex items-center justify-center">
+        <Home size={18} className="text-gray-300"/>
+      </div>
+    )}
+    <div className="flex-1 min-w-0">
+      <div className="flex justify-between text-sm mb-1">
+        <a href={`https://acces-immobilier.com/fr/detail-bien.html?ref=${list.id}`} target="_blank" rel="noreferrer"
+          className="font-semibold text-gray-800 truncate pr-4 hover:text-indigo-600 hover:underline">
+          {idx+1}. {list.title} <span className="text-gray-400 font-normal text-xs">({list.id})</span>
+        </a>
+        <span className="font-bold text-indigo-600 flex items-center gap-1 flex-shrink-0"><Eye size={13}/> {list.views}</span>
+      </div>
+      <div className="w-full bg-gray-100 rounded-full h-1.5">
+        <div className="bg-gradient-to-r from-blue-500 to-indigo-500 h-1.5 rounded-full" style={{ width: `${(list.views / maxViews) * 100}%` }}></div>
+      </div>
+    </div>
+  </div>
+))}
             {topAnnonces.filter(a => a.views > 0).length === 0 && (
               <p className="text-center text-gray-400 text-sm py-8">Visitez des fiches bien pour voir les stats</p>
             )}
