@@ -491,7 +491,7 @@ fetch(`${API}?action=top_annonces&periode=${topPeriode}`)
         title: get('title') || 'Bien immobilier',
         city: get('city') || '',
         price: new Intl.NumberFormat('fr-FR').format(get('price')) + ' €',
-        image: get('picture') || get('photo') || get('image') || '',
+        image: (() => { const f = b.find(x => x.std_name === 'pictures'); return f && Array.isArray(f.value) && f.value.length > 0 ? f.value[0] : ''; })(),
         views: vueBDD ? parseInt(vueBDD.vues) : 0
       };
     }).sort((a, b) => b.views - a.views);
