@@ -485,7 +485,7 @@ fetch(`${API}?action=top_annonces&periode=${topPeriode}`)
     const top = listings
   .filter(b => {
     const cat = b.find(x => x.std_name === 'category_txt');
-    return !cat || cat.value !== 'Sold';
+        return !cat || (cat.value !== 'Sold' && cat.value !== 'Rented');
   })
   .map(b => {
       const get = n => { const f = b.find(x => x.std_name === n); return f ? f.value : ''; };
