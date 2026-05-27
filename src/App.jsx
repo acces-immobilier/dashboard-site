@@ -482,7 +482,12 @@ fetch(`${API}?action=top_annonces&periode=${topPeriode}`)
   .then(r => r.json())
   .then(topBDD => {
     if (!Array.isArray(topBDD)) return;
-    const top = listings.map(b => {
+    const top = listings
+  .filter(b => {
+    const cat = b.find(x => x.std_name === 'category_txt');
+    return !cat || cat.value !== 'Sold';
+  })
+  .map(b => {
       const get = n => { const f = b.find(x => x.std_name === n); return f ? f.value : ''; };
       const ref = get('reference') || get('id');
       const vueBDD = topBDD.find(t => t.ref_bien === ref);
